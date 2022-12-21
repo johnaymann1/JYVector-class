@@ -44,7 +44,7 @@ JYVector<T>::JYVector (const JYVector& other)
     arr = new T[other.SIZE];
     SIZE = other.SIZE;
     used = other.used;
-    
+
     for(int i = 0; i<SIZE; i++)
     {
         arr[i] = (other.arr)[i];
@@ -80,7 +80,6 @@ JYVector<T>& JYVector<T>::operator=(const JYVector<T> &other)
 
 
 
-
 //move assignment
 template <typename T>
 JYVector<T>& JYVector<T>::operator=(JYVector<T>&& other)
@@ -96,7 +95,7 @@ JYVector<T>& JYVector<T>::operator=(JYVector<T>&& other)
         {
             delete arr;
         }
-        
+
         used = move(other.used);
         SIZE = move(other.SIZE);
         arr = move(other.arr);
@@ -104,7 +103,7 @@ JYVector<T>& JYVector<T>::operator=(JYVector<T>&& other)
         other.arr = nullptr;
     }
 
-    
+
     return *this;
 }
 
@@ -140,24 +139,23 @@ void JYVector<T>::push_back(T item)
     if (used == SIZE) //if the number of used is equal to the size of the vector
     {
         T* temp = new T[SIZE + 1]; //increase the size by 1
-        
+
         //copying the items from the smaller vector to the bigger one
         for (int i = 0; i < SIZE; i++)
         {
             temp[i] = arr[i];
         }
-        
-        
+
+
         delete[] arr;
         arr = temp;
         SIZE = SIZE + 1;
 
     }
-    
+
     arr[used] = item;
     used++;
 }
-
 
 
 
@@ -168,7 +166,6 @@ void JYVector<T>::pop_back()
     SIZE--;
     used--;
 }
-
 
 
 
@@ -188,7 +185,7 @@ void JYVector<T>::erase(int index)
         {
             cout<<"Out of range !!"<<endl;
         }
-    
+
     arr[index]=NULL;
     for(int i = index; i <=SIZE; i++)
     {
@@ -224,6 +221,40 @@ void JYVector<T>::clear()
 
 //======================================================================================================================
 
+// Comparison operations
+
+template <typename T>
+bool JYVector<T>::operator==(const JYVector<T>&other) {
+
+if (other.size != SIZE) return 0;
+for (int i=0; i<SIZE; i++) {
+
+    if (arr [i] != (other.arr) [i]) return 0;
+
+}
+return 1;
+}
+
+template <typename T>
+bool JYVector<T>::operator< (const JYVector<T>&other) {
+
+
+for (int i=0; i<SIZE; i++) {
+
+    if (arr [i] < (other.arr) [i]) return 1;
+    else if (arr [i] > (other.arr) [i]) return 0;
+
+}
+}
+
+
+
+
+
+
+
+//======================================================================================================================
+
 // Capacity operations
 template <typename T>
 const int JYVector<T>::Size()
@@ -248,7 +279,7 @@ int JYVector<T>::resize(int n)
         {
             arr[i]=NULL;
         }
-        
+
     }
     else
     {
@@ -272,32 +303,31 @@ bool JYVector<T>::empty()
         {
             return false;
         }
-                
+
     }
-    
+
     return true;
 }
 
 //======================================================================================================================
-//template <typename T>
-//std::ostream& operator << (std::ostream& out,const JYVector<T>& vec)
-//{
-//    out<<"[";
-//    for (int i = 0; i < vec.SIZE; i++)
-//    {
-//        if (i != (vec.SIZE)-1 )
-//        {
-//             out<<vec[i]<<',';
-//        }
-//        
-//          out<<vec[i];
-//    }
-//    out<<"]";
-//    
-//    return out;
-//}
+// operator <<
+template <typename T>
+     ostream& operator<<(ostream& out, JYVector<T> &vec)
+{
+    out<<"[";
+    for (int i = 0; i < vec.SIZE; i++)
+    {
+        if (i != (vec.SIZE)-1 )
+        {
+             out<<(vec.arr)[i]<<',';
+        }
 
+          out<<(vec.arr)[i];
+    }
+    out<<"]";
 
+    return out;
+}
 
 
 
@@ -315,11 +345,12 @@ template <typename T> void JYVector<T>::print()
             {
                 cout<<arr[i];
             }
-    
-              
+
+
         }
         cout<<"]";
         cout<<endl;
 }
+
 
 
