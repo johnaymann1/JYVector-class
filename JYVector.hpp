@@ -56,8 +56,8 @@ public:
     // Or u can use std::iterator so you can
     // apply STL algorithms on JYVector
 
-    T  begin();    // Return an iterator (T*)
-    T  end();    // Return an iterator (T*)
+    T*  begin();    // Return an iterator (T*)
+    T*  end();    // Return an iterator (T*)
 
 
 //======================================================================================================================
