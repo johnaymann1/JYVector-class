@@ -1,3 +1,5 @@
+#include "JYVector.h"
+
 //
 //  JYVector.cpp
 //  Assignment-3
@@ -5,7 +7,7 @@
 //  Created by John Ayman on 09/12/2022.
 //
 #include <iostream>
-#include "JYVector.hpp"
+#include "JYVector.h"
 
 using namespace std;
 
@@ -218,6 +220,26 @@ void JYVector<T>::clear()
     }
 
 }
+
+//======================================================================================================================
+
+// Iterators
+
+template <typename T>
+T* begin() {
+
+return arr;
+
+}
+
+
+template <typename T>
+T* end() {
+
+return &arr [SIZE];
+
+}
+
 
 //======================================================================================================================
 
